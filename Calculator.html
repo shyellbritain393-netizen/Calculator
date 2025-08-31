@@ -1,0 +1,124 @@
+<!DOCKTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculator</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+display: flex;
+justify-content: center;
+align-items: centre;
+heigt: 100vh;
+background: pink;
+margin: 0;
+}
+
+.calculator {
+background: white;
+padding: 20px;
+border-radius: 15px;
+box-shadow: 0px 4px 20px rgba(0,0,0,0.2);
+width: 260px;
+}
+
+#result {
+width: 100%;
+height: 60px;
+text-align: right;
+padding: 10px;
+font-size: 20px;
+margin-bottom: 15px;
+border: 1px solid #ccc;
+border-radius: 10px;
+box-sizing: border-box;
+}
+
+.buttons {
+diaplay: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 10px;
+}
+
+button {
+padding: 20px;
+font-size: 18px;
+border: none;
+border-radius: 10px;
+background: #eee;
+cursor: pointer;
+transition: 0.2s;
+}
+
+button:hover {
+background: #ddd;
+}
+
+.equal {
+grid-column: span 2;
+background: #4CAF50;
+color: white;
+}
+</style>
+</head>
+<body>
+<div class="calculator">
+<input type="text" id="result" disabled>
+<div class="buttons">
+<!-- Row 1 -->
+<button onclick="clearResult()">C</button>
+<button onclick="deleteChar()">DEL</button>
+<button onclick="append('%')">%</button>
+<button onclick="append('/')">/</button>
+
+<!-- Row 2 -->
+<button onclick="append('7')">7</button>
+<button onclick="append('8')">8</button>
+<button onclick="append('9')">9</button>
+<button onclick="append('*')">*</button>
+
+<!-- Row 3 -->
+<button onclick="append('4')">4</button>
+<button onclick="append('5')">5</button>
+<button onclick="append('6')">6</button>
+<button onclick="append('-')">-</button>
+
+<!-- Row 4 -->
+<button onclick="append('1')">1</button>
+<button onclick="append('2')">2</button>
+<button onclick="append('3')">3</button>
+<button onclick="append('+')">+</button>
+
+<!-- Row 5 -->
+<button onclick="append('0')">0</button>
+<button onclick="append('.')">.</button>
+<button class="equal" onclick="calculate()">=</button>
+</div>
+</div>
+
+<script>
+function append(value) {
+document.getElementById("result").value += value;
+}
+
+function clearResult() {
+document.getElementById("result").value = "";
+}
+
+function deleteChar() {
+let current = document.getElementById("result").value;
+document.getElementById("result").value = current.slice(0, -1);
+}
+
+function calculate() {
+try {
+let expression = document.getElementById("result").value;
+document.getElementById("result").value = eval(expression);
+} catch {
+document.getElementById("result").value = "error";
+}
+}
+</script>
+</body>
+</html>
